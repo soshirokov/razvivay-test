@@ -1,26 +1,16 @@
-import React from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React, { useEffect, useState } from 'react'
+import utils from './utils'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  )
+  const [weater, setWeater] = useState({})
+
+  useEffect(() => {
+    utils.api.getWeather({ lat: 55.75396, lon: 37.620393 }).then((result) => {
+      setWeater(result)
+    })
+  }, [])
+
+  return <div className="App">{JSON.stringify(weater)}</div>
 }
 
 export default App
